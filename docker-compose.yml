@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  web:
+    image: webdevops/php-apache:8.2-alpine
+    container_name: Apache-PHP
+    tty: true
+    ports:
+      - "8800:80"
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    environment:
+      WEB_DOCUMENT_ROOT: /app
+    links:
+      - database
+
+  database:
+    image: postgres:15.2-alpine3.17
+    container_name: PostgreSQL
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: devDB@2023
+      POSTGRES_DB: Market
