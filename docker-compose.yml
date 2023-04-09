@@ -24,3 +24,9 @@ services:
     environment:
       POSTGRES_PASSWORD: devDB@2023
       POSTGRES_DB: Market
+    volumes:
+      - postgres-data:/var/lib/postgres
+      - ./database/DatabaseStruct.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  postgres-data:
