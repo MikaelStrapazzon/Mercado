@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  web:
+  api:
     image: webdevops/php-apache:8.2-alpine
     container_name: Apache-PHP
     tty: true
@@ -14,6 +14,21 @@ services:
       WEB_DOCUMENT_ROOT: /app
     links:
       - database
+
+  web:
+    image: node:18.15.0-alpine
+    container_name: front-reactJs
+    tty: true
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
+    command: sh -c "npm install && npm start"
+    links:
+      - api
 
   database:
     image: postgres:15.2-alpine3.17
