@@ -9,7 +9,7 @@ use system\Routes;
 
 $routes = new Routes([
     new route('tax', 'GET', Tax::class, "getAll"),
-    new route('static/{id}', 'GET', Tax::class, "pathVariable"),
+    new route('tax', 'POST', Tax::class, "create")
 ]);
 
 try {

@@ -2,6 +2,7 @@
 
 namespace Http\Controller;
 
+use Entity\tax as TaxEntity;
 use service\tax as taxService;
 
 class tax {
@@ -17,8 +18,15 @@ class tax {
         return $this->taxService->findAll();
     }
 
-    public static function pathVariable($id): string
+    public function create(): array
     {
-        return "Hello World: " . $id;
+        $newTax = new TaxEntity(
+            0,
+            $_POST['acronym'] ?? null,
+            $_POST['name'] ?? null,
+            $_POST['default_percentage_value'] ?? null,
+        );
+
+        return $this->taxService->create($newTax);
     }
 }
