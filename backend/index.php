@@ -2,14 +2,14 @@
 require_once "system/autoloader.php";
 require_once "configs.php";
 
-use Http\Controller\Test;
+use Http\Controller\Tax;
 use Http\dto\response;
 use System\Object\route;
 use system\Routes;
 
 $routes = new Routes([
-    new route('static', 'GET', Test::class, "staticReturn"),
-    new route('static/{id}', 'GET', Test::class, "pathVariable"),
+    new route('tax', 'GET', Tax::class, "getAll"),
+    new route('static/{id}', 'GET', Tax::class, "pathVariable"),
 ]);
 
 try {
