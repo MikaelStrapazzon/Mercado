@@ -4,6 +4,8 @@ import styled from "styled-components";
 export const Container = styled.div`
     height: 100vh;
     width: max(100vw, 1920px);
+  
+    overflow: hidden;
 `;
 
 export const MenuBar = styled.div`

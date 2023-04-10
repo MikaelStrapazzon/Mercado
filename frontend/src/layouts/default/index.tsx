@@ -5,11 +5,11 @@ import { faStore } from "@fortawesome/free-solid-svg-icons";
 
 import { Container, MenuBar } from "./style";
 
-interface DefaultLayout {
+interface DefaultLayoutProps {
     children: ReactNode
 }
 
-export function DefaultLayout({ children }: DefaultLayout) {
+export function DefaultLayout({ children }: DefaultLayoutProps) {
     return (
         <Container>
             <MenuBar>
