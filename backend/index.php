@@ -1,5 +1,6 @@
 <?php
 require_once "system/autoloader.php";
+require_once "system/cors.php";
 require_once "configs.php";
 
 use Http\Controller\Tax;
