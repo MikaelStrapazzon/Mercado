@@ -1,5 +1,10 @@
 # Mercado
 
+## Informações
+- API: Porta 8800
+- Frontend: Porta 3000
+- Banco de Dados: Porta 5432
+
 ## Como executar o projeto
 ### Desenvolvimento
 - Preencher os valores no arquivo "backend/configs.php"
