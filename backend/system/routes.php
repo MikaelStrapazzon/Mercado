@@ -2,6 +2,8 @@
 
 namespace System;
 
+use Exception;
+
 class Routes {
 
     /**
@@ -16,9 +18,10 @@ class Routes {
     /**
      * Checks and executes the requested route in the http request
      *
-     * @return string
+     * @return array
+     * @throws Exception
      */
-    public function processRequest(): string
+    public function processRequest(): array
     {
         $routeRequest = substr(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), 1);
         $methodRequest = $_SERVER['REQUEST_METHOD'];
@@ -28,8 +31,10 @@ class Routes {
                 continue;
 
             if(!preg_match('/{.+}/', $route->getRoute())) {
-                if($routeRequest == $route->getRoute())
-                    return call_user_func([$route->getController(), $route->getMethod()]);
+                if($routeRequest == $route->getRoute()) {
+                    $controller = new ($route->getController())();
+                    return call_user_func([$controller, $route->getMethod()]);
+                }
             }
             else {
                 $explodeRoute = explode('/', $route->getRoute());
@@ -46,10 +51,11 @@ class Routes {
                         continue 2;
                 }
 
-                return call_user_func_array([$route->getController(), $route->getMethod()], $valuesParameters);
+                $controller = new ($route->getController())();
+                return call_user_func_array([$controller, $route->getMethod()], $valuesParameters);
             }
         }
 
-        return 'Route does not exist';
+        throw new Exception("Route does not exist", 404);
     }
 }
